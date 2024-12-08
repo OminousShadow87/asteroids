@@ -1,5 +1,6 @@
 import pygame
 import sys
+import random
 from constants import *
 from player import *
 from circleshape import *
@@ -42,7 +43,7 @@ def main():
                 sys.exit()
             for pew in bullets:
                 if obj.collide(pew):
-                    obj.kill()
+                    obj.split()
                     pew.kill()
         for obj in drawable:
             obj.draw(screen)
