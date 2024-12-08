@@ -5,13 +5,16 @@ from player import *
 from circleshape import *
 from asteroid import *
 from AsteroidField import *
+from shot import *
 
 updatable = pygame.sprite.Group()
 drawable = pygame.sprite.Group()
 rocks = pygame.sprite.Group()
+bullets = pygame.sprite.Group()
 Player.containers = (updatable, drawable)
 Asteroid.containers = (updatable, drawable, rocks)
 AsteroidField.containers = updatable
+Shot.containers = (updatable, drawable, bullets)
 
 def main():
     pygame.init()
@@ -37,6 +40,10 @@ def main():
             if obj.collide(player):
                 print("Game over!")
                 sys.exit()
+            for pew in bullets:
+                if obj.collide(pew):
+                    obj.kill()
+                    pew.kill()
         for obj in drawable:
             obj.draw(screen)
         pygame.display.flip()
